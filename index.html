@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- YouTube embeds need the page origin in the Referer header. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Appa Music</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231ed760'/%3E%3Cpath d='M7 10v4M10 7.5v9M13 9v6M16 10.5v3' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="setup" class="login hidden">
+    <form class="login-card" id="setup-form">
+      <div class="logo" id="setup-logo">Appa Music</div>
+      <p class="login-lead">Free music from YouTube. No account or subscription needed. You only need a free YouTube API key.</p>
+      <div class="setup">
+        <strong>Get a free API key (about 2 minutes)</strong>
+        <ol>
+          <li>Open the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">YouTube Data API v3</a> page in Google Cloud, create a project if asked, and click <b>Enable</b>.</li>
+          <li>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Credentials</a> → <b>Create credentials</b> → <b>API key</b>.</li>
+          <li>Recommended: restrict the key to <b>Websites</b> → <code id="referrer"></code> and to the YouTube Data API v3.</li>
+          <li>Paste the key below.</li>
+        </ol>
+        <input id="api-key" placeholder="YouTube API key" autocomplete="off" spellcheck="false">
+      </div>
+      <button class="login-btn" id="setup-btn" type="submit">Start listening</button>
+      <p id="setup-error" class="login-error hidden"></p>
+      <p class="attrib">Music plays through YouTube's official embedded player.</p>
+    </form>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <nav class="panel nav">
+        <a href="#/" class="nav-link" data-route="home"></a>
+        <a href="#/search" class="nav-link" data-route="search"></a>
+        <a href="#/library" class="nav-link mobile-only" data-route="library"></a>
+      </nav>
+      <section class="panel library">
+        <div class="library-top">
+          <a class="library-head" href="#/library" id="library-head"></a>
+          <button class="icon-btn" id="new-playlist-btn" aria-label="Create playlist" title="Create playlist"></button>
+        </div>
+        <div class="lib-list" id="lib-list"></div>
+      </section>
+    </aside>
+
+    <main class="panel main" id="main">
+      <div class="topbar" id="topbar">
+        <button class="round-btn" id="back-btn" aria-label="Go back"></button>
+        <button class="round-btn" id="fwd-btn" aria-label="Go forward"></button>
+        <label class="search-box hidden" id="search-box">
+          <span id="search-icon"></span>
+          <input id="search-input" type="search" placeholder="What do you want to play?" autocomplete="off" enterkeyhint="search">
+        </label>
+      </div>
+      <div id="view"></div>
+    </main>
+
+    <aside class="panel np-panel hidden" id="np-panel">
+      <div class="np-panel-head">Now playing</div>
+      <div class="video"><div id="yt-player"></div></div>
+      <div class="np-panel-info">
+        <div class="np-panel-text">
+          <div class="np-big-title" id="np-big-title"></div>
+          <div class="np-big-artist" id="np-big-artist"></div>
+        </div>
+        <button class="icon-btn like-btn" data-like-current aria-label="Save to Liked Songs"></button>
+      </div>
+      <div class="np-up">
+        <h3>Next in queue</h3>
+        <div id="up-list"></div>
+      </div>
+    </aside>
+
+    <footer class="player">
+      <div class="now" id="now">
+        <div class="np-art" id="np-art"></div>
+        <div class="np-meta">
+          <div class="np-title" id="np-title"></div>
+          <div class="np-artist" id="np-artist"></div>
+        </div>
+        <button class="icon-btn like-btn hidden" id="like-btn" data-like-current aria-label="Save to Liked Songs"></button>
+      </div>
+      <div class="controls">
+        <div class="buttons">
+          <button class="icon-btn" id="shuffle-btn" aria-label="Shuffle"></button>
+          <button class="icon-btn" id="prev-btn" aria-label="Previous"></button>
+          <button class="play-btn" id="play-btn" aria-label="Play"></button>
+          <button class="icon-btn" id="next-btn" aria-label="Next"></button>
+          <button class="icon-btn" id="repeat-btn" aria-label="Repeat"></button>
+        </div>
+        <div class="progress">
+          <span id="pos">0:00</span>
+          <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+          <span id="dur">0:00</span>
+        </div>
+      </div>
+      <div class="extra">
+        <button class="icon-btn" id="mute-btn" aria-label="Mute"></button>
+        <input type="range" id="volume" min="0" max="100" value="50" aria-label="Volume">
+      </div>
+    </footer>
+  </div>
+
+  <div id="menu" class="menu hidden" role="menu"></div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <form class="modal-card" id="modal-form">
+      <h2 id="modal-title"></h2>
+      <p id="modal-text" class="modal-text"></p>
+      <input id="modal-input" autocomplete="off" spellcheck="false">
+      <div class="modal-actions">
+        <button type="button" class="link-btn" id="modal-cancel">Cancel</button>
+        <button type="submit" class="login-btn" id="modal-ok"></button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
