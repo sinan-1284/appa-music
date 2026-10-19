@@ -4,6 +4,8 @@ A free music player in the browser. Search and play almost any song, with liked 
 playlists and a queue. Music comes from YouTube through the official YouTube Data API and
 the embedded YouTube player. You don't need an account or a subscription.
 
+**Live:** https://sinan-1284.github.io/appa-music/ (on first visit, paste your own free YouTube API key; see Setup).
+
 ## Setup (once, about 2 minutes)
 1. Open https://console.cloud.google.com/apis/library/youtube.googleapis.com, create a
    project if asked, and click **Enable**.
