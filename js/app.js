@@ -2,13 +2,12 @@ import { YOUTUBE_API_KEY as SHARED_KEY } from '../config.js';
 import * as yt from './yt.js';
 import * as player from './player.js';
 import * as store from './store.js';
-import { icon, logo } from './icons.js';
+import { icon } from './icons.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const view = $('#view');
 const main = $('#main');
-const KEY_STORAGE = 'sw_yt_key';
 // config.local.js is optional and git-ignored, so your own key never gets committed.
 const { YOUTUBE_API_KEY: LOCAL_KEY = '' } = await import('../config.local.js').catch(() => ({}));
 const CONFIG_KEY = LOCAL_KEY || SHARED_KEY;
@@ -752,46 +751,7 @@ async function loadMore(btn) {
   }
 }
 
-/* ---------- Setup & startup ---------- */
-
-function storedKey() {
-  try { return CONFIG_KEY || localStorage.getItem(KEY_STORAGE) || ''; } catch { return CONFIG_KEY; }
-}
-
-async function checkAndSaveKey(key) {
-  yt.setKey(key);
-  await yt.validateKey();
-  try { localStorage.setItem(KEY_STORAGE, key); } catch {}
-}
-
-function showSetup() {
-  $('#app').classList.add('hidden');
-  $('#setup').classList.remove('hidden');
-  $('#setup-logo').innerHTML = `${logo}Appa Music`;
-  $('#referrer').textContent = `${location.origin}/*`;
-  const input = $('#api-key');
-  const btn = $('#setup-btn');
-  const error = $('#setup-error');
-  input.focus();
-  $('#setup-form').onsubmit = async e => {
-    e.preventDefault();
-    const key = input.value.trim();
-    error.classList.add('hidden');
-    if (!key) return input.focus();
-    btn.disabled = true;
-    btn.textContent = 'Checking key…';
-    try {
-      await checkAndSaveKey(key);
-      $('#setup').classList.add('hidden');
-      startApp();
-    } catch (err) {
-      error.textContent = err.message;
-      error.classList.remove('hidden');
-    }
-    btn.disabled = false;
-    btn.textContent = 'Start listening';
-  };
-}
+/* ---------- Startup ---------- */
 
 function startApp() {
   if (state.started) return;
@@ -816,10 +776,5 @@ function startApp() {
   route();
 }
 
-const key = storedKey();
-if (key) {
-  yt.setKey(key);
-  startApp();
-} else {
-  showSetup();
-}
+yt.setKey(CONFIG_KEY);
+startApp();

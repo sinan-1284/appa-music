@@ -276,25 +276,11 @@ input[type=range]:hover::-moz-range-thumb, input[type=range]:focus-visible::-moz
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* ---------- Login ---------- */
-.login { height: 100%; display: grid; place-items: center; padding: 16px; background: linear-gradient(#2a2a2a, #000); overflow-y: auto; }
-.login-card { background: var(--panel); border-radius: 8px; padding: 48px 40px; max-width: 480px; width: 100%; text-align: center; }
-.logo { display: inline-flex; align-items: center; gap: 10px; font-size: 30px; font-weight: 800; letter-spacing: -.03em; }
-.logo svg { font-size: 44px; }
-.login-lead { color: var(--muted); margin: 16px 0 28px; line-height: 1.5; font-size: 15px; }
-.setup { text-align: left; margin-bottom: 24px; font-size: 13px; color: var(--muted); line-height: 1.6; }
-.setup strong { color: #fff; font-size: 14px; }
-.setup ol { padding-left: 18px; margin-top: 6px; }
-.setup a { color: #fff; text-decoration: underline; }
-.setup code { background: #2a2a2a; color: #fff; padding: 2px 6px; border-radius: 4px; user-select: all; word-break: break-all; }
-.setup input { width: 100%; margin-top: 14px; background: #121212; border: 1px solid #727272; border-radius: 4px; padding: 12px; color: #fff; font-size: 14px; }
-.setup input:focus { outline: 2px solid #fff; border-color: transparent; }
+/* ---------- Buttons ---------- */
 .login-btn { width: 100%; background: var(--green); color: #000; font-weight: 700; font-size: 16px; padding: 14px 32px; border-radius: 500px; }
 .login-btn:hover { background: #3be477; transform: scale(1.02); }
 .link-btn { color: var(--muted); font-size: 13px; margin-top: 16px; text-decoration: underline; }
 .link-btn:hover { color: #fff; }
-.login-error { color: #f15e6c; margin-top: 16px; line-height: 1.5; }
-.attrib { margin-top: 28px; font-size: 12px; color: #727272; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {

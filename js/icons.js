@@ -26,4 +26,3 @@ export const icon = {
   note: svg('M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z'),
 };
 
-export const logo = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1ed760"/><path d="M7 10v4M10 7.5v9M13 9v6M16 10.5v3" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>`;

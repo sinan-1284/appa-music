@@ -202,6 +202,3 @@ export async function playlistInfo(playlistId) {
   return { id: p.id, name: decode(p.snippet.title) };
 }
 
-export async function validateKey() {
-  await call('/videos', { part: 'id', chart: 'mostPopular', maxResults: 1 });
-}

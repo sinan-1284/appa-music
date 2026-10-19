@@ -10,26 +10,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="setup" class="login hidden">
-    <form class="login-card" id="setup-form">
-      <div class="logo" id="setup-logo">Appa Music</div>
-      <p class="login-lead">Free music from YouTube. No account or subscription needed. You only need a free YouTube API key.</p>
-      <div class="setup">
-        <strong>Get a free API key (about 2 minutes)</strong>
-        <ol>
-          <li>Open the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">YouTube Data API v3</a> page in Google Cloud, create a project if asked, and click <b>Enable</b>.</li>
-          <li>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Credentials</a> → <b>Create credentials</b> → <b>API key</b>.</li>
-          <li>Recommended: restrict the key to <b>Websites</b> → <code id="referrer"></code> and to the YouTube Data API v3.</li>
-          <li>Paste the key below.</li>
-        </ol>
-        <input id="api-key" placeholder="YouTube API key" autocomplete="off" spellcheck="false">
-      </div>
-      <button class="login-btn" id="setup-btn" type="submit">Start listening</button>
-      <p id="setup-error" class="login-error hidden"></p>
-      <p class="attrib">Music plays through YouTube's official embedded player.</p>
-    </form>
-  </div>
-
   <div id="app" class="app hidden">
     <aside class="sidebar">
       <nav class="panel nav">
