@@ -55,6 +55,9 @@ img { display: block; }
 .nav-link svg { font-size: 24px; }
 .nav-link:hover, .nav-link.active { color: var(--text); text-decoration: none; }
 .mobile-only { display: none; }
+.brand { display: flex; align-items: center; gap: 12px; padding: 8px 12px 12px; font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.brand:hover { text-decoration: none; }
+.brand svg { font-size: 32px; }
 
 .library { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .library-top { display: flex; align-items: center; padding-right: 16px; }
@@ -287,7 +290,8 @@ input[type=range]:hover::-moz-range-thumb, input[type=range]:focus-visible::-moz
   .app { grid-template-columns: 72px minmax(0, 1fr); }
   .nav { padding: 8px 4px; }
   .nav-link { justify-content: center; padding: 12px 0; }
-  .nav-link span, .library-head span, .lib-meta { display: none; }
+  .nav-link span, .library-head span, .lib-meta, .brand span { display: none; }
+  .brand { justify-content: center; padding: 8px 0 12px; }
   .library-head { justify-content: center; padding: 16px 0 8px; }
   .lib-list { padding: 0 4px 8px; }
   .lib-item { justify-content: center; }
@@ -313,6 +317,7 @@ input[type=range]:hover::-moz-range-thumb, input[type=range]:focus-visible::-moz
   .library { display: none; }
   .nav { display: flex; justify-content: space-around; border-radius: 0; padding: 4px 16px; background: #000; }
   .mobile-only { display: flex; }
+  .brand { display: none; }
   .nav-link { flex-direction: column; gap: 2px; font-size: 11px; padding: 6px 12px; }
   .nav-link span { display: block; }
   .controls .progress, .buttons > .icon-btn { display: none; }

@@ -2,7 +2,7 @@ import { YOUTUBE_API_KEY as SHARED_KEY } from '../config.js';
 import * as yt from './yt.js';
 import * as player from './player.js';
 import * as store from './store.js';
-import { icon } from './icons.js';
+import { icon, logo } from './icons.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -681,6 +681,7 @@ function onClick(e) {
 
 function setupShell() {
   const labelled = (svg, label) => `${svg}<span>${label}</span>`;
+  $('#brand').innerHTML = labelled(logo, 'Appa Music');
   $('.nav-link[data-route="home"]').innerHTML = labelled(icon.home, 'Home');
   $('.nav-link[data-route="search"]').innerHTML = labelled(icon.search, 'Search');
   $('.nav-link[data-route="library"]').innerHTML = labelled(icon.library, 'Your Library');

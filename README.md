@@ -1,3 +1,5 @@
+<img src="assets/logo.svg" width="96" alt="Appa Music logo">
+
 # Appa Music
 
 A free music player in the browser. Search and play almost any song, with liked songs,
